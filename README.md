@@ -5,7 +5,7 @@ Eine moderne Präsentations-Website für die Planung und Visualisierung einer 35
 ## ✨ Features
 - **Interaktiver Pflanzplan:** Detaillierte Übersicht aller 27 Sträucher mit Links zur Baumschule.
 - **Wachstums-Visualisierung:** KI-generierte Bilder zeigen die Hecke nach 1, 3, 5 und 10 Jahren.
-- **Die Grüne Meile:** Eine horizontale Sequenz-Map mit interaktiver Pfeil-Navigation.
+- **Die Grüne Meile:** Eine horizontale Sequenz-Map mit echten Produktfotos der Baumschule Horstmann und interaktiver Pfeil-Navigation.
 - **Premium UX:** Scroll-Progress-Indikator, Floating Back-to-Top Button und sanfte Animationen.
 - **Modernes UI:** Glassmorphism-Design, Lucide-Icons und ein harmonisches "Nature-Green" Farbschema.
 - **Budget-Kalkulation:** Transparente Kostenaufstellung (Stand 24.04.2026) mit veredeltem Tabellen-Design.

@@ -7,14 +7,15 @@
 - [ ] Initialer Code-Push zu GitHub (User-Aktion)
 - [ ] Live-Gang der Website auf Vercel (User-Aktion)
 - [ ] Aktuelle Phase: Verfeinerung & Qualitätssicherung
+- [x] Verifizierung & Optimierung der echten Produktfotos (Baumschule Horstmann) via Firecrawl (CDN-Links)
 - [x] Integration des neuen Heckenbildes (harmonisch)
 - [x] UI/UX Qualitätscheck (Pro Max) & Optimierungen
-    - [x] Scroll-Progress-Indikator hinzufügen
-    - [x] Navigations-Buttons für "Die Grüne Meile" implementieren
-    - [x] Floating "Back-to-Top" Button hinzufügen
-    - [x] Budget-Tabelle optisch aufwerten
-    - [x] Barrierefreiheit (Aria-Labels, Fokus-States) prüfen
-- [ ] Abschluss-Dokumentation & Projektübergabe
+- [x] Scroll-Progress-Indikator hinzugefügt
+- [x] Navigations-Buttons für "Die Grüne Meile" implementiert
+- [x] Floating "Back-to-Top" Button hinzugefügt
+- [x] Budget-Tabelle optisch aufgewertet
+- [x] Barrierefreiheit (Aria-Labels, Fokus-States) verifiziert
+- [x] Abschluss-Dokumentation & Projektübergabe
 
 ## In Arbeit
 - [ ] Installation Tropfschlauch für die Bewässerung im 1. Jahr
