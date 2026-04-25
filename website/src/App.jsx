@@ -34,7 +34,7 @@ const plants = [
 
 const images = [
   { src: '/Images/Growth_Start.jpg', title: 'Planung & Start', desc: 'Die Ausgangssituation am Zaun' },
-  { src: '/Images/Growth_Full.png', title: 'Volle Entfaltung', desc: 'Die Mischhecke in prachtvoller Blüte' },
+  { src: '/Images/Bluehende_Mischhecke_Wachstum_Rev.png', title: 'Volle Entfaltung', desc: 'Die Mischhecke in prachtvoller Blüte' },
   { src: '/Images/Bluehende_Hecke_Sonne.png', title: 'Sommertraum', desc: 'Blühende Hecke im sonnigen Garten' }
 ];
 

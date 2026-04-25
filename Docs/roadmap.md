@@ -20,6 +20,7 @@
 - [ ] Installation Tropfschlauch für die Bewässerung im 1. Jahr
 
 ## Erledigt
+- [x] Bildaustausch: "Die Mischhecke in prachtvoller Blüte" durch optimierte Version des Wachstumsprozesses ersetzt
 - [x] Transparenz: Preisstand-Hinweis (24.04.2026) in Budget-Sektionen implementiert
 - [x] Zusätzliches Bild der blühenden Hecke in die Galerie aufgenommen ("Sommertraum")
 - [x] Verifizierung und Korrektur der Produkt-Links im Pflanzplan (Abgleich mit `einkaufsliste.csv`)
