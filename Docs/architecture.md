@@ -22,3 +22,4 @@
 - **Styling:** Modernes CSS (Glassmorphism), Lucide-Icons für die Visualisierung.
 - **Hosting:** Vercel (optimiert für schnelle Auslieferung und automatische Deployments).
 - **Struktur:** Der Code der Web-App befindet sich im Verzeichnis `/website`.
+- **Transparenz:** Die Budget-Daten basieren auf einer Recherche der Baumschule Horstmann (Stand: 24.04.2026).

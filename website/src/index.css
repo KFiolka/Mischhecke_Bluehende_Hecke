@@ -262,6 +262,36 @@ h1, h2, h3, h4 {
   font-weight: 500;
 }
 
+/* Gallery Stack (Vertical Layout) */
+.gallery-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.gallery-stack .gallery-card {
+  width: 100%;
+}
+
+.gallery-stack .img-container {
+  aspect-ratio: 16/9;
+  background: #f0f0f0;
+}
+
+.gallery-stack .img-container img {
+  object-fit: contain; /* Verhindert das Abschneiden von Texten */
+  padding: 10px; /* Kleiner Sicherheitsabstand zum Rand */
+}
+
+.gallery-stack .img-overlay {
+  top: auto;
+  left: auto;
+  bottom: 15px;
+  right: 15px;
+}
+
 /* Timeline (Pflanzplan) */
 .legend {
   display: flex;
@@ -464,6 +494,16 @@ h1, h2, h3, h4 {
   text-align: center;
 }
 
+.price-date-info {
+  text-align: center;
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+  margin-top: -20px;
+  margin-bottom: 25px;
+  font-style: italic;
+  opacity: 0.8;
+}
+
 .table-responsive {
   overflow-x: auto;
 }
@@ -545,13 +585,109 @@ footer {
   .budget-breakdown { padding: 15px; margin-top: 30px; }
   .budget-table th, .budget-table td { padding: 10px 5px; font-size: 0.9rem; }
 }
-/* Visual Map Section */
-.visual-map-wrapper {
+/* Scroll Progress Bar */
+.scroll-progress-container {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  z-index: 1000;
+}
+
+.scroll-progress-bar {
+  height: 100%;
+  background: var(--color-accent);
+  transition: width 0.1s ease-out;
+}
+
+/* Floating Back to Top Button */
+.back-to-top {
+  position: fixed;
+  bottom: 30px;
+  right: 30px;
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 900;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px);
+  transition: var(--transition);
+  border: 1px solid rgba(255, 255, 255, 0.4);
+  color: var(--color-primary-dark);
+}
+
+.back-to-top.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.back-to-top:hover {
+  background: var(--color-accent);
+  color: var(--color-text);
+  box-shadow: var(--box-shadow-hover);
+  transform: scale(1.1);
+}
+
+/* Visual Map Container & Nav */
+.visual-map-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.map-nav-btn {
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(8px);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 50%;
+  width: 44px;
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: var(--transition);
+  color: var(--color-primary-dark);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+  flex-shrink: 0;
+  z-index: 5;
+}
+
+.map-nav-btn:hover {
+  background: var(--color-primary);
+  color: white;
+  transform: scale(1.1);
+}
+
+.map-nav-btn:active {
+  transform: scale(0.95);
+}
+
+@media (max-width: 768px) {
+  .map-nav-btn { display: none; }
+}
+
+/* Visual Map Track & Items */
+.visual-map-wrapper {
+  flex-grow: 1;
   overflow-x: auto;
   padding: 20px 0;
   -webkit-overflow-scrolling: touch;
-  cursor: grab;
+  scrollbar-width: none; /* Hide scrollbar Firefox */
+}
+
+.visual-map-wrapper::-webkit-scrollbar {
+  display: none; /* Hide scrollbar Chrome/Safari */
 }
 
 .visual-map-track {
@@ -560,12 +696,12 @@ footer {
   min-width: max-content;
   padding: 40px 100px 20px 100px;
   position: relative;
-  height: 200px; /* Compact height */
+  height: 200px;
 }
 
 .garden-bed {
   position: absolute;
-  top: 62px; /* Perfectly centered behind the 50px circles */
+  top: 62px;
   left: 0;
   width: 100%;
   height: 8px;
@@ -646,17 +782,88 @@ footer {
   gap: 10px;
   color: var(--color-text-light);
   font-size: 0.9rem;
-  margin-top: 0;
-  margin-bottom: 10px;
+  margin-top: 10px;
 }
 
-@media (max-width: 768px) {
-  .visual-map-track {
-    height: 180px;
-    padding-left: 50px;
-    padding-right: 50px;
-  }
-  .meter-scale {
-    padding: 0 50px;
-  }
+/* Budget Table Improvements */
+.budget-breakdown {
+  margin-top: 20px;
+  border-radius: var(--border-radius);
+  padding: 40px;
+  overflow: hidden;
 }
+
+.budget-table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  text-align: left;
+  color: var(--color-text);
+}
+
+.budget-table th {
+  background: rgba(5, 150, 105, 0.05);
+  padding: 18px 15px;
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  color: var(--color-primary-dark);
+  border-bottom: 2px solid rgba(5, 150, 105, 0.1);
+}
+
+.budget-table td {
+  padding: 15px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  font-size: 0.95rem;
+  transition: var(--transition);
+}
+
+.budget-table tr:last-child td {
+  border-bottom: none;
+}
+
+.budget-table tr:nth-child(even) {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.budget-table tbody tr:hover td {
+  background: rgba(5, 150, 105, 0.02);
+  color: var(--color-primary);
+}
+
+/* Accessibility & Focus */
+button:focus-visible, 
+a:focus-visible, 
+input:focus-visible {
+  outline: 3px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.btn-primary:focus-visible {
+  outline-color: var(--color-primary);
+}
+
+/* Interactive Elements Cursor */
+.timeline-item, 
+.btn-primary, 
+.back-to-top, 
+.map-nav-btn,
+.gallery-card {
+  cursor: pointer;
+}
+
+/* Animation refinement */
+.section-container {
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUpIn 0.8s ease-out forwards;
+}
+
+@keyframes fadeUpIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+/* Delayed animations for cards */
+.concept-card:nth-child(2) { animation-delay: 0.2s; }
+.concept-card:nth-child(3) { animation-delay: 0.4s; }

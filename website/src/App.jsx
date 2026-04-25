@@ -1,4 +1,5 @@
-import { Trees, Flower2, Sun, Leaf, Ruler, Bug, ExternalLink } from 'lucide-react';
+import React, { useState, useEffect, useRef } from 'react';
+import { Trees, Flower2, Sun, Leaf, Ruler, Bug, ExternalLink, ChevronUp, ChevronLeft, ChevronRight } from 'lucide-react';
 import './index.css';
 
 const plants = [
@@ -32,10 +33,9 @@ const plants = [
 ];
 
 const images = [
-  { src: '/Images/Nach_einem_Jahr_Anwachsphase.png', title: 'Nach 1 Jahr', desc: 'Die Anwachsphase' },
-  { src: '/Images/Nach_drei_Jahren_Der-Zusammenschluss.png', title: 'Nach 3 Jahren', desc: 'Der Zusammenschluss' },
-  { src: '/Images/Nach_fünf_Jahren_Volle_Pracht_und_Zielhöhe.png', title: 'Nach 5 Jahren', desc: 'Volle Pracht & Zielhöhe' },
-  { src: '/Images/Nach_zehn_Jahren_Die_reife_Hecke.png', title: 'Nach 10 Jahren', desc: 'Die reife Hecke' }
+  { src: '/Images/Growth_Start.jpg', title: 'Planung & Start', desc: 'Die Ausgangssituation am Zaun' },
+  { src: '/Images/Growth_Full.png', title: 'Volle Entfaltung', desc: 'Die Mischhecke in prachtvoller Blüte' },
+  { src: '/Images/Bluehende_Hecke_Sonne.png', title: 'Sommertraum', desc: 'Blühende Hecke im sonnigen Garten' }
 ];
 
 const budgetDetails = [
@@ -58,17 +58,49 @@ const budgetDetails = [
 ];
 
 function App() {
+  const [scrollProgress, setScrollProgress] = useState(0);
+  const [showBackToTop, setShowBackToTop] = useState(false);
+  const visualMapRef = useRef(null);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = (window.pageYOffset / totalHeight) * 100;
+      setScrollProgress(progress);
+      setShowBackToTop(window.pageYOffset > 500);
+    };
+
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
+
+  const scrollVisualMap = (direction) => {
+    if (visualMapRef.current) {
+      const scrollAmount = direction === 'left' ? -300 : 300;
+      visualMapRef.current.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    }
+  };
+
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <div className="app-container">
+      {/* Scroll Progress Bar */}
+      <div className="scroll-progress-container">
+        <div className="scroll-progress-bar" style={{ width: `${scrollProgress}%` }}></div>
+      </div>
+
       {/* Hero Section */}
       <header className="hero">
-        <div className="hero-background" style={{backgroundImage: `url('/Images/Nach_fünf_Jahren_Volle_Pracht_und_Zielhöhe.png')`}}></div>
+        <div className="hero-background" style={{backgroundImage: `url('/Images/Hero_Background.png')`}}></div>
         <div className="hero-overlay"></div>
         <div className="hero-content">
           <span className="badge">Gartenprojekt 2026</span>
           <h1>Die Blühende Mischhecke</h1>
           <p>Ein lebendiger Sichtschutz, ein Paradies für Insekten und Vögel, und ein "Vier-Jahreszeiten-Mix" auf 35 Metern Länge.</p>
-          <a href="#vision" className="btn-primary">Entdecke die Vision</a>
+          <a href="#vision" className="btn-primary" aria-label="Entdecke die Vision der Mischhecke">Entdecke die Vision</a>
         </div>
       </header>
 
@@ -104,7 +136,7 @@ function App() {
             <h2>Wachstum & Entwicklung</h2>
             <p>So wird sich unsere Hecke in den nächsten Jahren entwickeln.</p>
           </div>
-          <div className="gallery-grid">
+          <div className="gallery-stack">
             {images.map((img, index) => (
               <div key={index} className="gallery-card glass-card">
                 <div className="img-container">
@@ -161,35 +193,43 @@ function App() {
         <section id="map" className="section-container bg-light">
           <div className="section-header">
             <h2>Die Grüne Meile (Visualisierung)</h2>
-            <p>Die 35 Meter lange Hecke von links nach rechts visualisiert. Scrolle horizontal, um die gesamte Strecke zu sehen.</p>
+            <p>Die 35 Meter lange Hecke von links nach rechts visualisiert. Nutze die Pfeile oder scrolle horizontal.</p>
+          </div>
+
+          <div className="visual-map-container">
+            <button className="map-nav-btn prev" onClick={() => scrollVisualMap('left')} aria-label="Nach links scrollen">
+              <ChevronLeft size={24} />
+            </button>
+            <div className="visual-map-wrapper" ref={visualMapRef}>
+              <div className="visual-map-track">
+                <div className="garden-bed"></div>
+                <div className="meter-scale">
+                  {[0, 5, 10, 15, 20, 25, 30, 35].map(m => (
+                    <span key={m}>{m}m</span>
+                  ))}
+                </div>
+                
+                {plants.map((plant, index) => (
+                  <div key={plant.id} className="map-item" style={{'--plant-color': plant.color}}>
+                    <div className="plant-visual">
+                      <plant.icon size={24} color={plant.color} />
+                    </div>
+                    <div className="map-item-label">
+                      <span>{(index * 1.3).toFixed(1)}m</span>
+                      <h5>{plant.name}</h5>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <button className="map-nav-btn next" onClick={() => scrollVisualMap('right')} aria-label="Nach rechts scrollen">
+              <ChevronRight size={24} />
+            </button>
           </div>
 
           <div className="scroll-hint">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
             <span>Wische oder ziehe nach rechts zum Erkunden</span>
-          </div>
-
-          <div className="visual-map-wrapper">
-            <div className="visual-map-track">
-              <div className="garden-bed"></div>
-              <div className="meter-scale">
-                {[0, 5, 10, 15, 20, 25, 30, 35].map(m => (
-                  <span key={m}>{m}m</span>
-                ))}
-              </div>
-              
-              {plants.map((plant, index) => (
-                <div key={plant.id} className="map-item" style={{'--plant-color': plant.color}}>
-                  <div className="plant-visual">
-                    <plant.icon size={24} color={plant.color} />
-                  </div>
-                  <div className="map-item-label">
-                    <span>{(index * 1.3).toFixed(1)}m</span>
-                    <h5>{plant.name}</h5>
-                  </div>
-                </div>
-              ))}
-            </div>
           </div>
         </section>
 
@@ -198,7 +238,7 @@ function App() {
           <div className="budget-content">
             <div className="budget-text">
               <h2>Das Budget</h2>
-              <p>Transparenz ist wichtig. Wir haben tagesaktuelle Preise der Baumschule Horstmann verglichen, um für Containerware (40-60 cm) ein realistisches Budget aufzustellen.</p>
+              <p>Transparenz ist wichtig. Die hier gezeigten Preise beziehen sich auf den Stand vom <strong>24.04.2026</strong> (Baumschule Horstmann) für Containerware (40-60 cm).</p>
               <ul className="budget-list">
                 <li>✅ 27 Premium-Heckenpflanzen</li>
                 <li>✅ Hohe Anwachsgarantie (Containerware)</li>
@@ -217,6 +257,7 @@ function App() {
         <section id="budget-details" className="section-container">
           <div className="budget-breakdown glass-card">
             <h3>Detaillierte Kostenaufstellung</h3>
+            <p className="price-date-info">Alle Preise auf Basis der Recherche vom 24.04.2026</p>
             <div className="table-responsive">
               <table className="budget-table">
                 <thead>
@@ -248,9 +289,18 @@ function App() {
         <section className="section-container cta-section">
           <h2>Lass uns gemeinsam loslegen!</h2>
           <p>Ein Projekt für eine grünere Nachbarschaft. Der nächste Schritt: Materialbeschaffung und Bodenvorbereitung.</p>
-          <button className="btn-primary" onClick={() => window.scrollTo({top: 0, behavior: 'smooth'})}>Nach oben</button>
+          <button className="btn-primary" onClick={scrollToTop} aria-label="Zum Seitenanfang springen">Nach oben</button>
         </section>
       </main>
+
+      {/* Floating Back to Top */}
+      <button 
+        className={`back-to-top glass-card ${showBackToTop ? 'visible' : ''}`} 
+        onClick={scrollToTop}
+        aria-label="Zurück nach oben"
+      >
+        <ChevronUp size={24} />
+      </button>
 
       <footer>
         <p>Projekt "Blühende Mischhecke" &copy; 2026. Erstellt für eine gute Nachbarschaft.</p>
