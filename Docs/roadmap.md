@@ -4,9 +4,9 @@
 - [ ] Materialbeschaffung (Pflanzen, Kompost, Erde, Bentonit/Tonmehl)
 - [ ] Bodenvorbereitung und Ausheben der Pflanzlöcher
 - [ ] Pflanzung der 27 Heckensträucher gemäß Pflanzplan
-- [ ] Initialer Code-Push zu GitHub (User-Aktion)
-- [ ] Live-Gang der Website auf Vercel (User-Aktion)
-- [ ] Aktuelle Phase: Verfeinerung & Qualitätssicherung
+- [x] Initialer Code-Push zu GitHub (User-Aktion)
+- [x] Live-Gang der Website auf Vercel (User-Aktion)
+- [x] Aktuelle Phase: Verfeinerung & Qualitätssicherung
 - [x] Verifizierung & Optimierung der echten Produktfotos (Baumschule Horstmann) via Firecrawl (CDN-Links)
 - [x] Integration des neuen Heckenbildes (harmonisch)
 - [x] UI/UX Qualitätscheck (Pro Max) & Optimierungen
