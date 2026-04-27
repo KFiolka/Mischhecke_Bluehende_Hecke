@@ -4,6 +4,7 @@ Hier werden gelöste Probleme und Learnings dokumentiert.
 
 ## Probleme & Lösungen
 - **NPM Execution Policy (Windows):** Das Ausführen von `npm` Befehlen in der PowerShell kann durch die Execution Policy blockiert werden. **Lösung:** Befehle via `cmd /c npm <command>` ausführen, um die PowerShell-Restriktionen zu umgehen.
+- **Fehlende externe CDN-Bilder nach Vercel Deployment:** Externe Bilder (z.B. von der Baumschule Horstmann) werden auf `localhost` korrekt angezeigt, brechen aber in der Produktion (Vercel) ab. Dies liegt oft am Hotlinking-Schutz des CDNs, das fremde Domains über den `Referer`-Header blockiert. **Lösung:** Das Attribut `referrerPolicy="no-referrer"` zum `<img>`-Tag hinzufügen, damit der Browser den Referer-Header unterdrückt und die Bilder geladen werden.
 
 ## Learnings
 - **Horizontale Scroll-Layouts für Sequenzen:** Bei der Visualisierung langer linearer Strukturen (wie einer 35m Hecke) bietet ein horizontal scrollbarer Bereich mit einer fixen "Boden"-Referenz (Garden Bed) und einer Meterskala die beste UX. **Wichtig:** Die vertikale Höhe muss kompakt gehalten werden (~200px), um übermäßigen Weißraum zu vermeiden, und Labels sollten außerhalb von Hintergrundelementen (wie dem braunen Beet-Streifen) platziert werden, um die Lesbarkeit zu gewährleisten.

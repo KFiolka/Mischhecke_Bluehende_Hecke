@@ -213,7 +213,7 @@ function App() {
                   <div key={plant.id} className="map-item" style={{'--plant-color': plant.color}}>
                     <div className="plant-visual">
                       {plant.img ? (
-                        <img src={plant.img} alt={plant.name} className="plant-photo" loading="lazy" />
+                        <img src={plant.img} alt={plant.name} className="plant-photo" loading="lazy" referrerPolicy="no-referrer" />
                       ) : (
                         <plant.icon size={24} color={plant.color} />
                       )}
